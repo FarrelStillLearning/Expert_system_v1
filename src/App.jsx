@@ -22,7 +22,7 @@ const App = () => {
   };
 
   const runForwardChaining = () => {
-    const results = inferDamage(selectedSymptoms, rules, damageTypes, getSolution);
+    const results = inferDamage(selectedSymptoms);
     setResult(results);
     setShowResults(true);
   };
@@ -36,7 +36,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 to-indigo-100 p-0 sm:p-4 md:p-6 lg:p-8">
-      {/* Main content container with max-width */}
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10">
@@ -44,7 +43,7 @@ const App = () => {
             Sistem Pakar Deteksi Kerusakan Jaringan Internet
           </h1>
           <p className="text-base sm:text-lg text-gray-600">
-            Metode Forward Chaining - Studi Kasus: Layanan Internet Diskominfotik Sumatera Barat
+            Metode Forward Chaining + Certainty Factor - Studi Kasus: Layanan Internet Diskominfotik Sumatera Barat
           </p>
           <div className="mt-4 bg-white rounded-lg shadow-md p-4 inline-block">
             <p className="text-xs sm:text-sm text-gray-500">
@@ -75,7 +74,6 @@ const App = () => {
                     onClick={() => toggleSymptom(symptom.id)}
                   >
                     <div className="flex items-start gap-3">
-                      {/* BULLETPROOF ROUND CHECK CIRCLE */}
                       <div 
                         className={`relative w-6 h-6 rounded-full border flex items-center justify-center ${
                           symptom.selected ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
@@ -159,12 +157,17 @@ const App = () => {
                 <div className="space-y-4">
                   {result.map((item, index) => (
                     <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                      <div className="flex flex-col sm:flex-row items-start">
-                        <div className="bg-red-100 text-red-800 rounded-lg p-3 mr-0 sm:mr-4 mb-3 sm:mb-0">
+                      <div className="flex items-start">
+                        <div className="bg-red-100 text-red-800 rounded-lg p-3 mr-4">
                           <span className="font-bold">{item.id}</span>
                         </div>
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.name}</h3>
+                          {/* Tambahkan baris untuk CF */}
+                          <div className="mb-3">
+                            <span className="text-sm font-medium text-gray-700">Tingkat Kepercayaan: </span>
+                            <span className="text-sm font-bold text-blue-600">{(item.cf * 100).toFixed(1)}%</span>
+                          </div>
                           <div className="bg-blue-50 p-3 rounded-lg">
                             <p className="text-sm font-medium text-blue-800 mb-1">Solusi:</p>
                             <p className="text-gray-700">{item.solution}</p>
@@ -207,10 +210,11 @@ const App = () => {
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Tentang Sistem Ini</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Metode Forward Chaining</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Metode Forward Chaining + Certainty Factor</h3>
               <p className="text-gray-600">
                 Forward Chaining adalah strategi pencarian dalam sistem pakar yang dimulai dari sekumpulan data atau fakta. 
                 Sistem akan mencari kesimpulan yang menjadi solusi dari permasalahan yang dihadapi berdasarkan aturan IF-THEN.
+                Certainty Factor (CF) menambahkan tingkat kepercayaan terhadap hasil diagnosis.
               </p>
             </div>
             <div>
