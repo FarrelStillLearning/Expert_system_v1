@@ -1,0 +1,9 @@
+[build]
+  # Build command: change into the UI folder, install deps, and build
+  command = "cd UI && npm ci && npm run build"
+  # Publish directory relative to repo root
+  publish = "UI/dist"
+
+[build.environment]
+  # Use Node version available on Netlify; optionally pin by setting NODE_VERSION
+  NODE_VERSION = "18"
