@@ -1,0 +1,12 @@
+{
+  "name": "inference-engine",
+  "version": "1.0.0",
+  "description": "Simple CLI forward-chaining inference engine (certainty factor) using rules.json",
+  "main": "src/engine.js",
+  "scripts": {
+    "start": "node src/engine.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
